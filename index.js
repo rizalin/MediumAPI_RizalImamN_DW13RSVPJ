@@ -7,6 +7,7 @@ const port = 5000
 
 app.use(bodyParser.json())
 const CategoriesController = require('./controllers/categories')
+const ArticlesController = require('./controllers/articles')
 
 app.group("/api/v1", (router) => {
     router.get("/categories", CategoriesController.index)
@@ -14,6 +15,12 @@ app.group("/api/v1", (router) => {
     router.post('/category', CategoriesController.store)
     router.patch('/category/:id', CategoriesController.update)
     router.delete('/category/:id', CategoriesController.delete)
+
+    router.get("/articles", ArticlesController.index)
+    router.get('/article/:id', ArticlesController.show)
+    router.post('/article', ArticlesController.store)
+    router.patch('/article/:id', ArticlesController.update)
+    router.delete('/article/:id', ArticlesController.delete)
 
 })
 

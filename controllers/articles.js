@@ -1,43 +1,50 @@
 const models = require('../models')
+const Article = models.article
 const Category = models.category
 
 
+
 exports.index = (req, res) => {
-    Category.findAll().then(categories =>res.send(categories))
+    Article.findAll({
+        include: [{
+            model: Category,
+            as: "categoryID"
+        }]
+    }).then(articles =>res.send(articles))
 }
 
 
 exports.show = (req, res) => {
-    Category.findOne({id: req.params.id}).then(category=> res.send(category))
+    Article.findOne({id: req.params.id}).then(article=> res.send(article))
 }
 
 exports.store = (req, res) => {
-    Category.create(req.body).then(category=> {
+    Article.create(req.body).then(article=> {
         res.send({
             message: "success",
-            category
+            article
         })
     })
 }
 
 exports.update = (req, res) => {
-    Category.update(
+    Article.update(
         req.body,
         {where: {id: req.params.id}}
     ).then(category=> {
         res.send({
             message: "success",
-            category
+            article
         })
     })
 }
 
 
 exports.delete = (req, res) => {
-    Category.destroy({where: {id: req.params.id}}).then(category=> {
+    Article.destroy({where: {id: req.params.id}}).then(article=> {
         res.send({
             message: "success",
-            category
+            article
         })
     })
 }
