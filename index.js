@@ -16,6 +16,7 @@ app.use(function(req, res, next) {
 
 const CategoriesController = require("./controllers/categories");
 const ArticlesController = require("./controllers/articles");
+const ByController = require("./controllers/articleByCategory");
 
 app.group("/api/v1", router => {
   router.get("/categories", CategoriesController.index);
@@ -30,6 +31,8 @@ app.group("/api/v1", router => {
   router.post("/article", ArticlesController.store);
   router.patch("/article/:id", ArticlesController.update);
   router.delete("/article/:id", ArticlesController.delete);
+
+  router.get("/category/:id/articles", ByController.byCategory);
 });
 
 app.get("/", (req, res) => {
