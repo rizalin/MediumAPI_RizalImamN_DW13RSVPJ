@@ -11,10 +11,13 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      content: {
+        type: Sequelize.STRING
+      },
       brief: {
         type: Sequelize.STRING
       },
-      writer: {
+      image: {
         type: Sequelize.STRING
       },
       category_id: {
@@ -27,11 +30,15 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-      content: {
-        type: Sequelize.STRING
-      },
-      img: {
-        type: Sequelize.STRING
+      author_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,
