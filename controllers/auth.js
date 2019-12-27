@@ -8,7 +8,8 @@ exports.login = (req, res) => {
     if (user) {
       const token = jwt.sign({ userId: user.id }, "arujisama");
       res.send({
-        user: { email: user.email },
+        name: user.name,
+        username: user.username,
         token
       });
     } else {
@@ -24,7 +25,8 @@ exports.register = (req, res) => {
   User.create(req.body).then(user => {
     const token = jwt.sign({ userId: user.id }, "arujisama");
     res.send({
-      user: { email: user.email },
+      name: user.name,
+      username: user.username,
       token
     });
   });

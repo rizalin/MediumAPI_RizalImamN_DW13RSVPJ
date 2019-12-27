@@ -36,7 +36,7 @@ exports.limit = (req, res) => {
       }
     ],
     order: [["id", "DESC"]],
-    attributes: ["title", "createdAt", "category_id", "author_id"],
+    attributes: ["id", "title", "createdAt", "category_id", "author_id"],
     limit: 5
   }).then(articles => res.send(articles));
 };

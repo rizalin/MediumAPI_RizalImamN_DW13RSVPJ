@@ -6,9 +6,14 @@ const Comment = models.comment;
 
 exports.index = (req, res) => {
   Comment.findAll({
-    include: [{ model: Article, as: "article", attributes: ["id", "title"] }],
+    include: [
+      { model: Article, as: "article", attributes: ["id", "title"] },
+      { model: User, as: "member", attributes: ["id", "name"] }
+    ],
     where: { article_id: req.params.id }
-  }).then(comment => res.send(comment));
+  })
+    .then(comment => res.send(comment))
+    .catch(err => console.log(err));
 };
 
 exports.store = (req, res) => {
@@ -23,10 +28,10 @@ exports.store = (req, res) => {
 exports.update = (req, res) => {
   Comment.update(req.body, {
     where: { user_id: req.body.user_id, article_id: req.params.id }
-  }).then(category => {
+  }).then(comment => {
     res.send({
       message: "success",
-      category
+      comment
     });
   });
 };

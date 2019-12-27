@@ -5,29 +5,13 @@ const User = models.user;
 
 // article by category
 exports.byCategory = (req, res) => {
-  Category.findOne({
-    include: [
-      {
-        model: Article,
-        as: "article",
-        include: [
-          {
-            model: User,
-            as: "authorId"
-          }
-        ]
-      }
-    ],
-    where: {
-      id: req.params.id
-    }
-  }).then(articles => res.send(articles));
-};
-
-//related article for article detail
-exports.related = (req, res) => {
   Article.findAll({
     include: [
+      {
+        model: Category,
+        as: "categoryId",
+        attributes: ["id", "name"]
+      },
       {
         model: User,
         as: "authorId",
@@ -37,6 +21,24 @@ exports.related = (req, res) => {
     where: {
       category_id: req.params.id
     }
+  }).then(articles => res.send(articles));
+};
+
+//related article for article detail
+exports.related = (req, res) => {
+  Article.findAll({
+    include: [
+      {
+        model: Category,
+        as: "categoryId",
+        attributes: ["id", "name"]
+      },
+      {
+        model: User,
+        as: "authorId",
+        attributes: ["id", "name"]
+      }
+    ]
   }).then(articles => {
     const data = shuffle(articles);
     res.send(data);

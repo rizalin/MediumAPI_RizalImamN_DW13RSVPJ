@@ -18,7 +18,7 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      following_user_id: {
+      following_user: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
