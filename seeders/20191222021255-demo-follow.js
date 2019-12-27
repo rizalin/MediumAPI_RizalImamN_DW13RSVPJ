@@ -7,7 +7,7 @@ module.exports = {
       [
         {
           user_id: 1,
-          following_user_id: 2,
+          following_user: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         }
