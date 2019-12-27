@@ -15,7 +15,9 @@
     "dialect": "mysql",
     "operatorsAliases": false
   },
-  "production": {
+ "production": {
+     "username": "root",
+    "password": "12345678",
     "use_env_variable": "DATABASE_URL",
     "dialect": "postgres",
     "protocol": "postgres",
